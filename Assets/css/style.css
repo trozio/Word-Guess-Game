@@ -1,0 +1,12 @@
+body{
+	background-image: url("/Users/Daniel.DANISURFACE/Documents/GitHub/Projects/Word-Guess-Game/Assets/images/christmastree.jpg");
+width: auto
+}
+
+h1
+,h2
+,h3{
+	text-align: center;
+	color: white;
+	font-family: 'Mountains of Christmas', cursive;
+}
