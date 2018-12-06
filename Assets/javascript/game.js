@@ -38,13 +38,15 @@
 				console.log(remainingLetters);
 
 			}
+
 		}
-		if (!match) {
+		if (word[i] !== guess){
+			console.log(guess);
 			usedLetters.push(guess);
 			lives--;
 		}
 
-			if (remainingLetters == 0){
+			if (remainingLetters < 1){
 				alert("You won!");
 				alert("The word was: " + word);
 				lives = 10;
