@@ -8,14 +8,68 @@
 </head>
 <body>
 	<h1>Press any key to get started!</h1>
+	<h2>Word: <span id="status"></span></h2>
+	<h2>Lives Left: <span id="lives"></span></h2>
+	<h2>Used Letters: <span id="used"></span></h2>
 	<script type="text/javascript">
+		let words = ["Advent", "angels", "announcement", "bells", "Bethlehem", "Blitzen", "candles", "candy", "candy canes", "cards", "cedar", "celebrate", "ceremonies", "chimney", "Christmas cookies", "Christmas tree", "cold", "Comet", "cranberry sauce", "crowds", "Cupid", "Dancer", "Dasher", "December", "decorations", "dolls", "Donner", "dressing", "eggnog", "elves", "family reunion", "festival", "fir", "Frosty", "fruitcake", "gift boxes", "gifts", "goodwill", "greetings", "ham", "happy", "holiday", "holly", "holy", "icicles", "jolly", "lights", "lists", "merry", "miracle", "mistletoe", "New Year", "Noel", "North Pole", "pageant", "parades", "party", "pie", "pine", "plum pudding", "poinsettia", "Prancer", "presents", "pumpkin pie", "punch", "red/green", "reindeer", "ribbon", "Rudolph", "sacred", "sales", "sauce", "Scrooge", "season", "sled", "sleigh bells", "snowflakes", "spirit", "St. Nick", "stand", "star", "stickers", "stocking stuffers", "sweet potato", "tidings", "tinsel", "togetherness", "toys", "tradition", "traffic", "trips", "turkey", "vacation", "Vixen", "Winter", "worship", "wrapping paper", "wreath", "yule", "yuletide"];
+
+		let guess;
+		let word = words[Math.floor(Math.random() * words.length)].toLowerCase();
+		let usedLetters = [];
+		let lives = 10;
+		let status = [];
+		let statusDisplay = document.getElementById("status");
+		let livesDisplay = document.getElementById("lives");
+		let usedDisplay = document.getElementById("used");
+		let alive = true;
+		let remainingLetters = 0;
+
+		for (var i = 0; i < word.length; i++) {
+			status[i] = "_";
+			remainingLetters++;
+		}
+
+		console.log("Word: " + word);
+		statusDisplay.innerHTML = status.join(" ");
+		livesDisplay.innerHTML = lives;
+		usedDisplay.innerHTML = usedLetters.join(" ");
 
 
-	let words = ["Advent", "angels", "announcement", "bells", "Bethlehem", "Blitzen", "candles", "candy", "candy canes", "cards", "cedar", "celebrate", "ceremonies", "chimney", "Christmas cookies", "Christmas tree", "cold", "Comet", "cranberry sauce", "crowds", "Cupid", "Dancer", "Dasher", "December", "decorations", "dolls", "Donner", "dressing", "eggnog", "elves", "family reunion", "festival", "fir", "Frosty", "fruitcake", "gift boxes", "gifts", "goodwill", "greetings", "ham", "happy", "holiday", "holly", "holy", "icicles", "jolly", "lights", "lists", "merry", "miracle", "mistletoe", "New Year", "Noel", "North Pole", "pageant", "parades", "party", "pie", "pine", "plum pudding", "poinsettia", "Prancer", "presents", "pumpkin pie", "punch", "red/green", "reindeer", "ribbon", "Rudolph", "sacred", "sales", "sauce", "Scrooge", "season", "sled", "sleigh bells", "snowflakes", "spirit", "St. Nick", "stand", "star", "stickers", "stocking stuffers", "sweet potato", "tidings", "tinsel", "togetherness", "toys", "tradition", "traffic", "trips", "turkey", "vacation", "Vixen", "Winter", "worship", "wrapping paper", "wreath", "yule", "yuletide"];
+		document.onkeyup = function(event) {
+			if (lives == 0) {
+				alert("You lost bih.");
+				alert("The word was: " + word);
+				alive = false;
 
-	document.onkeyup(function(event));
-	keyPressed = event.key.toLowerCase();
+			}
+			if (alive) {
+				let match = false;
+				guess = event.key.toLowerCase();
+				for (i = 0; i < word.length; i++) {
+					if (word[i] === guess) {
+						match = true;
+						status[i] = guess;
+						remainingLetters--;
+						console.log(remainingLetters);
+					}
+				}
 
-</script>
+				if (!match) {
+					usedLetters.push(guess);
+					lives--;
+				}
+				statusDisplay.innerHTML = status.join(" ");
+				livesDisplay.innerHTML = lives;
+				usedDisplay.innerHTML = usedLetters.join(" ");
+
+				if (remainingLetters == 0){
+					alert("You won bih.");
+					alert("The word was: " + word);
+					alive = false;
+				}
+			}
+		};
+	</script>
 </body>
 </html>
