@@ -3,6 +3,7 @@ let words = ["Advent", "angels", "announcement", "bells", "Bethlehem", "Blitzen"
 
 let guess;
 let word = words[Math.floor(Math.random() * words.length)].toLowerCase();
+let wordArray = [];
 let usedLetters = [];
 let lives = 10;
 let status = [];
@@ -15,25 +16,21 @@ let winsDisplay = document.getElementById("win");
 let losses = 0;
 let lossesDisplay = document.getElementById("loss");
 
-		function newWord(){
-			lives = 10;
-	        usedLetters = [];
-			word = words[Math.floor(Math.random() * words.length)].toLowerCase();
-			displayWord();
-		}
-		newWord();
-		function displayWord() {
-			for (var i = 0; i < word.length; i++) {
-			     status[i] = "_";
-			     remainingLetters++;
-				console.log("Word: " + word);
-
-					}
-
-		}
-
-
-
+function newWord(){
+	lives = 10;
+	usedLetters = [];
+	word = words[Math.floor(Math.random() * words.length)].toLowerCase();
+	wordArray = word.split("");
+	displayWord();
+}
+newWord();
+function displayWord() {
+	for (var i = 0; i < word.length; i++) {
+		status[i] = "_";
+		remainingLetters++;
+		console.log("Word: " + word);
+	}
+}
 
 statusDisplay.innerHTML = status.join(" ");
 livesDisplay.innerHTML = lives;
@@ -44,8 +41,10 @@ lossesDisplay.innerHTML = losses;
 document.onkeyup = function(event) {
      guess = event.key.toLowerCase();
      let correct = false;
-     for (i = 0; i < word.length; i++) {
-          if (word[i] === guess) {
+	 console.log(wordArray);
+     for (i = 0; i < wordArray.length; i++) {
+          if (wordArray[i] == guess) {
+			  wordArray[i] = "";
               correct = true;
               status[i] = guess;
               remainingLetters--;
