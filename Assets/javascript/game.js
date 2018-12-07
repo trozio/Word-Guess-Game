@@ -14,15 +14,26 @@ let winsDisplay = document.getElementById("win");
 let losses = 0;
 let lossesDisplay = document.getElementById("loss");
 
+		function newWord(){
+			lives = 10;
+	        usedLetters = [];
+			word = words[Math.floor(Math.random() * words.length)].toLowerCase();
+			displayWord();
+		}
+		newWord();
+		function displayWord() {
+			for (var i = 0; i < word.length; i++) {
+			     status[i] = "_";
+			     remainingLetters++;
+				console.log("Word: " + word);
 
-for (var i = 0; i < word.length; i++) {
-     status[i] = "_";
-     remainingLetters++;
-     lives = 10;
-     usedLetters = [];
-}
+					}
 
-console.log("Word: " + word);
+		}
+
+
+
+
 statusDisplay.innerHTML = status.join(" ");
 livesDisplay.innerHTML = lives;
 usedDisplay.innerHTML = usedLetters.join(" ");
@@ -52,6 +63,7 @@ document.onkeyup = function(event) {
           alert("The word was: " + word);
           lives = 10;
           wins++;
+		  newWord();
      }
 
      if (lives == 0) {
@@ -59,6 +71,7 @@ document.onkeyup = function(event) {
           alert("The word was: " + word);
           lives = 10;
           losses++;
+		  newWord();
      }
 
      statusDisplay.innerHTML = status.join(" ");
